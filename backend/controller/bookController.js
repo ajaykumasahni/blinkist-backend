@@ -19,17 +19,7 @@ exports.createBook = async (req, res) => {
 // getAllBook
 
 exports.getAllBook = async (req, res) => {
-  console.log(req, "=================== ");
   try {
-    // const books = await Book.find()
-    // const user = await User.findById(req.user._id)
-    // const keyword = req.query.search ? {
-    //     $or: [
-    //         { bookCategory: { $regex: req.query.search, $options: "i" } },
-    //         { author: { $regex: req.query.search, options: "i" } },
-    //     ]
-    // } : {}
-
     const books = await Book.find({
       $or: [
         { author: { $regex: req.params.key } },
@@ -37,14 +27,6 @@ exports.getAllBook = async (req, res) => {
         { status: { $regex: req.params.key } },
       ],
     });
-
-    // const books = await Book.find({keyword)
-    console.log("hello world");
-    console.log(books, "=========");
-
-    // const readingStatus = books.filter((book) => book.status === "reading")
-
-    // const finishReading = books.filter((book) => book.status === "finishReading")
 
     for (let i = 0; i < books.length; i++) {
       if (books[i].status === "reading") {
@@ -61,10 +43,6 @@ exports.getAllBook = async (req, res) => {
     res.status(200).json({
       success: true,
       books,
-      // filter: {
-      //     reading: readingStatus.length,
-      //     finsh: finishReading.length,
-      // }
     });
   } catch (error) {
     res.status(500).json(error);
@@ -73,8 +51,8 @@ exports.getAllBook = async (req, res) => {
 
 exports.getAllBooks = async (req, res) => {
   try {
-    // const apiFeature = new ApiFeatures(Book.find(), req.query).search()
-    const apiFeature = new ApiFeatures(Book.find(), req.query).searchByAuthor().searchByCategory().searchByStatus();
+    const apiFeature = new ApiFeatures(Book.find(), req.query).search()
+    // const apiFeature = new ApiFeatures(Book.find(), req.query).searchByAuthor().searchByCategory().searchByStatus();
 
     let books = await apiFeature.query;
 
