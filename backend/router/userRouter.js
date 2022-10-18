@@ -4,10 +4,10 @@ const { isAuthenticatedUser } = require("../middleware/auth")
 
 const router = express.Router()
 
-router.route("/register").post(registerUser)
-router.route("/login").post(loginUser)
-router.route("/logout").get(logoutUser)
-router.route("/details").get(isAuthenticatedUser,getUserDetails)
+router.route("/books/user/register").post(registerUser)
+router.route("/books/user/login").post(loginUser)
+router.route("/books/logout").get(logoutUser)
+router.route("/books/user-details").get(isAuthenticatedUser,getUserDetails)
 
 
 
