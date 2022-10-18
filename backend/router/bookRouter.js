@@ -5,12 +5,12 @@ const { isAuthenticatedUser } = require("../middleware/auth")
 const router = express.Router()
 
 
-router.route("/create/book").post(isAuthenticatedUser,createBook)
+router.route("/books").post(isAuthenticatedUser,createBook)
 router.route("/books").get(isAuthenticatedUser,getAllBooks)
-router.route("/books/:key").get(isAuthenticatedUser,getAllBook)
-router.route("/single/:id").get(isAuthenticatedUser,getSingleBook)
-router.route("/update/:id").put(isAuthenticatedUser,updateBook)
-router.route("/saved/:id").patch(isAuthenticatedUser,savedPost)
-router.route("/unsave/:id").patch(isAuthenticatedUser,unSavedPost)
+// router.route("/books/:key").get(isAuthenticatedUser,getAllBook)
+router.route("/books/:id").get(isAuthenticatedUser,getSingleBook)
+router.route("/books/:id").put(isAuthenticatedUser,updateBook)
+router.route("/books/saved/:id").patch(isAuthenticatedUser,savedPost)
+router.route("/books/unsave/:id").patch(isAuthenticatedUser,unSavedPost)
 
 module.exports = router
